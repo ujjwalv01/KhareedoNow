@@ -39,7 +39,7 @@ const createOrders = async (req, res) => {
     }
 };
 
-const getMyOrders = async (req, res) => {
+const myOrders = async (req, res) => {
     try {
         const orders = await Order.find({ userId: req.user._id });
         res.json(orders);
@@ -72,4 +72,4 @@ const updateOrderStatus = async (req, res) => {
     }
 };
 
-module.exports = { createOrders, getMyOrders, getOrders, updateOrderStatus };
+module.exports = { createOrders, myOrders, getOrders, updateOrderStatus };
