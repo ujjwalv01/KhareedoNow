@@ -1,4 +1,4 @@
-const Order = require('../models/Order');
+const Order = require('../model/order');
 const sendEmail = require('../utils/sendEmail');
 
 const createOrders = async (req, res) => {
@@ -26,11 +26,11 @@ const createOrders = async (req, res) => {
         <p>Thank you for shopping with KhareedoNow!</p>
       `;
 
-            await sendEmail({
-                email: req.user.email,
-                subject: 'KhareedoNow - Order Confirmation',
+            await sendEmail(
+                req.user.email,
+                'KhareedoNow - Order Confirmation',
                 message
-            });
+            );
 
             res.status(201).json(createdOrder);
         }

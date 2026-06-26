@@ -1,6 +1,6 @@
 const Product = require('../model/product');
 const cloudinary = require('../config/cloudinary');
-const { upload } = require('../utils/multer');
+
 
 // Get all products
 const getProducts = async (req, res) => {
@@ -46,7 +46,7 @@ const createProduct = async (req, res) => {
             name,
             description,
             price,
-            imageUrl: result.secure_url,
+            imageUrl: imageUrl,
             category,
             stock
         });
@@ -88,7 +88,7 @@ const deleteProduct = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         if (product) {
-            await product.remove();
+            await Product.deleteOne({ _id: req.params.id });
             res.json({ message: "Product removed" });
         } else {
             res.status(404).json({ message: "Product not found" });
